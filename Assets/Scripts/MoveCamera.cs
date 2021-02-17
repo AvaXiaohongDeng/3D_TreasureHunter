@@ -19,8 +19,10 @@ public class MoveCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //keep the camera following the cube always
         transform.position = cube.transform.position + cameraOffSet;
 
+        //control camera by the arrow keys
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
 
