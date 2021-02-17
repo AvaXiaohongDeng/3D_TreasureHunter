@@ -8,7 +8,9 @@ public class TreasureTerrain : MonoBehaviour
     public GameObject cube;
     public float m_speed;
     public GameObject sphere;
-    public GameObject water;
+    public GameObject water1;
+    public GameObject water2;
+    public GameObject water3;
     public bool isEntered;
 
     private void Start()
@@ -16,10 +18,11 @@ public class TreasureTerrain : MonoBehaviour
         cube = GameObject.Find("Cube");
         m_speed = 100f;
         sphere = GameObject.Find("Sphere");
-        water = GameObject.Find("Water");
+        water1 = GameObject.Find("Water1");
+        water2 = GameObject.Find("Water2");
+        water3 = GameObject.Find("Water3");
         isEntered = false;
-
-        Debug.Log("test water" + water.transform.position);
+        
     }
 
     private void Update()
@@ -69,19 +72,23 @@ public class TreasureTerrain : MonoBehaviour
         }
 
         //halve the cube's speed after it entered water
-        if (GetComponent<Collider>().bounds.Contains(water.transform.position))
+        if (water1.GetComponent<Collider>().bounds.Contains(transform.position)
+            || water2.GetComponent<Collider>().bounds.Contains(transform.position)
+            || water3.GetComponent<Collider>().bounds.Contains(transform.position))
         {
-            Debug.Log("Exit water");
+            Debug.Log("Enter water");
             isEntered = true;
-            m_speed = 50f;
+            m_speed /= 2;
         }
 
         //double the cube's speed after it exited water
-        if (isEntered && (!GetComponent<Collider>().bounds.Contains(water.transform.position)))
+        if (isEntered && (!water1.GetComponent<Collider>().bounds.Contains(transform.position)
+            && !water2.GetComponent<Collider>().bounds.Contains(transform.position)
+            &&!water3.GetComponent<Collider>().bounds.Contains(transform.position)))
         {
             Debug.Log("Exit water");
             isEntered = true;
-            m_speed = 100f;
+            m_speed *= 2;
         }
 
         //catch the sphere
