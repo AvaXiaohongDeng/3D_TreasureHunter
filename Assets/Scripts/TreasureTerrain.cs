@@ -27,7 +27,7 @@ public class TreasureTerrain : MonoBehaviour
         Vector3 pos = cube.transform.position;
 
         //keep the cube is always on the top or terrain.
-        pos.y = Terrain.activeTerrain.SampleHeight(transform.position);
+        pos.y = Terrain.activeTerrain.SampleHeight(transform.position)+3;
         cube.transform.position = pos;
 
 

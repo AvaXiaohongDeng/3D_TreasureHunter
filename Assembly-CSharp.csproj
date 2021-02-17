@@ -65,7 +65,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Loss.cs" />
+    <Compile Include="Assets\Scripts\Lose.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\Win.cs" />
     <Compile Include="Assets\Scripts\CounterDownTimer.cs" />
