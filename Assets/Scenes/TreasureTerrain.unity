@@ -191,8 +191,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426269573}
-  m_LocalRotation: {x: 0.20550112, y: 0.0149686, z: 0.0031438062, w: -0.9785374}
-  m_LocalPosition: {x: 588.61914, y: -680.6836, z: -737.4778}
+  m_LocalRotation: {x: -0.13310297, y: 0.0041668587, z: 0.00055933435, w: 0.9910933}
+  m_LocalPosition: {x: 522.9625, y: -334.91473, z: -371.37592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -830,7 +830,7 @@ Transform:
   m_GameObject: {fileID: 1375694147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10, y: 0, z: 10}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -850,7 +850,7 @@ MonoBehaviour:
   cube: {fileID: 1375694147}
   m_speed: 0
   sphere: {fileID: 1728637163}
-  water: {fileID: 1863203301}
+  water: {fileID: 0}
   isEntered: 0
 --- !u!114 &1375694154
 MonoBehaviour:
@@ -1041,6 +1041,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114, type: 3}
   m_PrefabInstance: {fileID: 2147474193}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &1863203302
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863203301}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1902193518
 GameObject:
   m_ObjectHideFlags: 0

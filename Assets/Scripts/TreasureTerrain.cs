@@ -8,9 +8,7 @@ public class TreasureTerrain : MonoBehaviour
     public GameObject cube;
     public float m_speed;
     public GameObject sphere;
-    public GameObject water1;
-    public GameObject water2;
-    public GameObject water3;
+    public GameObject water;
     public bool isEntered;
 
     private void Start()
@@ -18,9 +16,7 @@ public class TreasureTerrain : MonoBehaviour
         cube = GameObject.Find("Cube");
         m_speed = 100f;
         sphere = GameObject.Find("Sphere");
-        water1 = GameObject.Find("Water1");
-        water2 = GameObject.Find("Water2");
-        water3 = GameObject.Find("Water3");
+        water = GameObject.Find("Water");
         isEntered = false;
         
     }
@@ -72,9 +68,7 @@ public class TreasureTerrain : MonoBehaviour
         }
 
         //halve the cube's speed after it entered water
-        if (water1.GetComponent<Collider>().bounds.Contains(transform.position)
-            || water2.GetComponent<Collider>().bounds.Contains(transform.position)
-            || water3.GetComponent<Collider>().bounds.Contains(transform.position))
+        if (water.GetComponent<Collider>().bounds.Contains(transform.position))
         {
             Debug.Log("Enter water");
             isEntered = true;
@@ -82,9 +76,7 @@ public class TreasureTerrain : MonoBehaviour
         }
 
         //double the cube's speed after it exited water
-        if (isEntered && (!water1.GetComponent<Collider>().bounds.Contains(transform.position)
-            && !water2.GetComponent<Collider>().bounds.Contains(transform.position)
-            &&!water3.GetComponent<Collider>().bounds.Contains(transform.position)))
+        if (isEntered && (!water.GetComponent<Collider>().bounds.Contains(transform.position)))
         {
             Debug.Log("Exit water");
             isEntered = true;
