@@ -7,6 +7,7 @@ public class TreasureTerrain : MonoBehaviour
 {
     public GameObject cube;
     public float m_speed;
+    public float start_speed;
     public float m_height;
     public GameObject sphere;
     public GameObject water;
@@ -16,22 +17,31 @@ public class TreasureTerrain : MonoBehaviour
     {
         cube = GameObject.Find("Cube");
         m_speed = 100f;
+        start_speed = 100f;
         m_height = cube.transform.localScale.y;
         sphere = GameObject.Find("Sphere");
-        water = GameObject.Find("Water");
-        isEntered = false;        
+        water = GameObject.Find("Water");                
     }
 
     private void Update()
     {
+        GluedToTerrain();
+        MoveCube();
+        HalfSpeed();
+        FindTreasure();        
+    }
 
-        Vector3 pos = cube.transform.position;
-
-        //keep the cube is always on the top or terrain.
-        pos.y = Terrain.activeTerrain.SampleHeight(transform.position)+ m_height/2;
+    //To keep the cube is always on the top or terrain.
+    public void GluedToTerrain()
+    {
+        Vector3 pos = cube.transform.position;        
+        pos.y = Terrain.activeTerrain.SampleHeight(transform.position) + m_height / 2;
         cube.transform.position = pos;
+    }
 
-
+    //To control the movement of the cube
+    public void MoveCube()
+    {
         //move the cube by the WASD keys
         if (Input.GetKey(KeyCode.W))
         {
@@ -67,24 +77,65 @@ public class TreasureTerrain : MonoBehaviour
         {
             transform.Rotate(0, 40, 0);
         }
+    }
 
-        //halve the cube's speed after it entered water
-        if (water.GetComponent<Collider>().bounds.Contains(transform.position))
+    //halve the cube's speed after it entered water
+    public void HalfSpeed()
+    {
+        //x,y,z of the water center
+        var waterCenterX = water.transform.position.x;
+        var waterCenterY = water.transform.position.y;
+        var waterCenterZ = water.transform.position.z;
+
+        //scale of x, y z
+        var waterScaleX = water.transform.localScale.x;
+        var waterScaleY = water.transform.localScale.y;
+        var waterScaleZ = water.transform.localScale.z;
+
+        //calculate offsets for x, y, and z based on that 1 scale is about 100f
+        var offsetX = waterScaleX * 100.0f / 2;
+        var offsetY = waterScaleY * 100.0f / 2;
+        var offsetZ = waterScaleZ * 100.0f / 2;
+
+        //min & max of x, y, z
+        var minWaterX = waterCenterX - offsetX;
+        var maxWaterX = waterCenterX + offsetX;
+        var minWaterY = waterCenterY - offsetY;
+        var maxWaterY = waterCenterY + offsetY;
+        var minWaterZ = waterCenterZ - offsetZ;
+        var maxWaterZ = waterCenterZ + offsetZ;
+
+        // x, y, z of the cube
+        var cubeX = cube.transform.position.x;
+        var cubeY = cube.transform.position.y;
+        var cubeZ = cube.transform.position.z;        
+        
+
+        // Check x, y, and z
+        if (cubeX > minWaterX && cubeX < maxWaterX &&
+            cubeY > minWaterY && cubeY < maxWaterY &&
+            cubeZ > minWaterZ && cubeZ < maxWaterZ)
         {
-            Debug.Log("Enter water");
-            isEntered = true;
-            m_speed /= 2;
+           if (m_speed == start_speed)
+           {
+                Debug.Log("Enter water");
+                // The speed is half in the water
+                m_speed = m_speed / 2;                
+            }
+        }
+        else
+        {
+            // Speed is normal
+            m_speed = start_speed;
         }
 
-        //double the cube's speed after it exited water
-        if (isEntered && (!water.GetComponent<Collider>().bounds.Contains(transform.position)))
-        {
-            Debug.Log("Exit water");
-            isEntered = true;
-            m_speed *= 2;
-        }
 
-        //catch the sphere
+    }
+
+    //To find the treasure
+    public void FindTreasure()
+    {
+        //catch the sphere, then load to win scene
         if (GetComponent<Collider>().bounds.Contains(sphere.transform.position))
         {
             Debug.Log("Win Scene Loading");
