@@ -31,8 +31,8 @@ public class CounterDownTimer : MonoBehaviour
         if(currentTime <= 0)
         {
             currentTime = 0;
-            Debug.Log("Lost Scene Loading");
-            SceneManager.LoadScene("Loss");
+            Debug.Log("Lose Scene Loading");
+            SceneManager.LoadScene("Lose");
         }
     }
 }

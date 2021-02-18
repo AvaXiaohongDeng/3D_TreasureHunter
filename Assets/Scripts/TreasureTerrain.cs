@@ -7,6 +7,7 @@ public class TreasureTerrain : MonoBehaviour
 {
     public GameObject cube;
     public float m_speed;
+    public float m_height;
     public GameObject sphere;
     public GameObject water;
     public bool isEntered;
@@ -15,10 +16,10 @@ public class TreasureTerrain : MonoBehaviour
     {
         cube = GameObject.Find("Cube");
         m_speed = 100f;
+        m_height = cube.transform.localScale.y;
         sphere = GameObject.Find("Sphere");
         water = GameObject.Find("Water");
-        isEntered = false;
-        
+        isEntered = false;        
     }
 
     private void Update()
@@ -27,7 +28,7 @@ public class TreasureTerrain : MonoBehaviour
         Vector3 pos = cube.transform.position;
 
         //keep the cube is always on the top or terrain.
-        pos.y = Terrain.activeTerrain.SampleHeight(transform.position)+3;
+        pos.y = Terrain.activeTerrain.SampleHeight(transform.position)+ m_height/2;
         cube.transform.position = pos;
 
 
