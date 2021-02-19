@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Loss : MonoBehaviour
+public class Lose : MonoBehaviour
 {  
 
     public void LoadTreasureTerrain()
