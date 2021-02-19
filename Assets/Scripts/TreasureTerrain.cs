@@ -5,22 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class TreasureTerrain : MonoBehaviour
 {
-    public GameObject cube;
-    public float m_speed;
-    public float start_speed;
-    public float m_height;
-    public GameObject sphere;
-    public GameObject water;
+    public GameObject cube, sphere, water;
+    public float m_speed,start_speed, m_height;    
     public bool isEntered;
 
     private void Start()
     {
         cube = GameObject.Find("Cube");
+        sphere = GameObject.Find("Sphere");
+        water = GameObject.Find("Water");
         m_speed = 100f;
         start_speed = 100f;
-        m_height = cube.transform.localScale.y;
-        sphere = GameObject.Find("Sphere");
-        water = GameObject.Find("Water");                
+        m_height = cube.transform.localScale.y;                      
     }
 
     private void Update()
@@ -32,51 +28,40 @@ public class TreasureTerrain : MonoBehaviour
     }
 
     //To keep the cube is always on the top or terrain.
-    public void GluedToTerrain()
-    {
+    public void GluedToTerrain(){
         Vector3 pos = cube.transform.position;        
         pos.y = Terrain.activeTerrain.SampleHeight(transform.position) + m_height / 2;
         cube.transform.position = pos;
     }
 
+    //To find the treasure
+    public void FindTreasure(){
+        //catch the sphere, then load to win scene
+        if (GetComponent<Collider>().bounds.Contains(sphere.transform.position))
+            SceneManager.LoadScene("Win");       
+    }
+
     //To control the movement of the cube
-    public void MoveCube()
-    {
+    public void MoveCube(){
         //move the cube by the WASD keys
         if (Input.GetKey(KeyCode.W))
-        {
             transform.Translate(m_speed * Time.deltaTime, 0, 0);
-        }
         else if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(-m_speed * Time.deltaTime, 0, 0);
-        }
+            transform.Translate(-m_speed * Time.deltaTime, 0, 0);       
         else if (Input.GetKey(KeyCode.D))
-        {
             transform.Translate(0, 0, m_speed * Time.deltaTime);
-        }
         else if (Input.GetKey(KeyCode.A))
-        {
             transform.Translate(0, 0, -m_speed * Time.deltaTime);
-        }
         else if (Input.GetKey(KeyCode.U))
-        {
             transform.Translate(0, m_speed * Time.deltaTime, 0);
-        }
         else if (Input.GetKey(KeyCode.J))
-        {
             transform.Translate(0, -m_speed * Time.deltaTime, 0);
-        }
 
         //rotate the cube using the QE keys
         if (Input.GetKey(KeyCode.E))
-        {
             transform.Rotate(0, 40, 0);
-        }
         else if (Input.GetKey(KeyCode.Q))
-        {
             transform.Rotate(0, 40, 0);
-        }
     }
 
     //halve the cube's speed after it entered water
@@ -132,15 +117,6 @@ public class TreasureTerrain : MonoBehaviour
 
     }
 
-    //To find the treasure
-    public void FindTreasure()
-    {
-        //catch the sphere, then load to win scene
-        if (GetComponent<Collider>().bounds.Contains(sphere.transform.position))
-        {
-            Debug.Log("Win Scene Loading");
-            SceneManager.LoadScene("Win");
-        }
-    }
+    
 
 }

@@ -8,28 +8,19 @@ public class MoveCamera : MonoBehaviour
     public GameObject cube;
     public Vector3 cameraOffSet;   
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         cube = GameObject.Find("Cube");
         cameraOffSet = new Vector3(-10, 5, -30);        
     }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //keep the camera following the cube always
+    
+    void Update(){
+        
         CameraFollowCube();
-
-        //control the movement of camera by using arrow keys
-        MoveCameraByArrow();
-         
+        MoveCameraByArrow();         
     }
 
     //keep the camera following the cube always
-    public void CameraFollowCube()
-    {
+    public void CameraFollowCube(){
         transform.position = cube.transform.position + cameraOffSet;
     }
 
