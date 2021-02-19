@@ -65,8 +65,7 @@ public class TreasureTerrain : MonoBehaviour
     }
 
     //halve the cube's speed after it entered water
-    public void HalfSpeed()
-    {
+    public void HalfSpeed(){
         //x,y,z of the water center
         var waterCenterX = water.transform.position.x;
         var waterCenterY = water.transform.position.y;
@@ -77,7 +76,8 @@ public class TreasureTerrain : MonoBehaviour
         var waterScaleY = water.transform.localScale.y;
         var waterScaleZ = water.transform.localScale.z;
 
-        //calculate offsets for x, y, and z based on that 1 scale is about 100f
+        //calculate offsets for x, y, and z based on 
+        //1 scale is 100f
         var offsetX = waterScaleX * 100.0f / 2;
         var offsetY = waterScaleY * 100.0f / 2;
         var offsetZ = waterScaleZ * 100.0f / 2;
@@ -93,30 +93,19 @@ public class TreasureTerrain : MonoBehaviour
         // x, y, z of the cube
         var cubeX = cube.transform.position.x;
         var cubeY = cube.transform.position.y;
-        var cubeZ = cube.transform.position.z;        
-        
+        var cubeZ = cube.transform.position.z;
 
         // Check x, y, and z
         if (cubeX > minWaterX && cubeX < maxWaterX &&
             cubeY > minWaterY && cubeY < maxWaterY &&
-            cubeZ > minWaterZ && cubeZ < maxWaterZ)
-        {
+            cubeZ > minWaterZ && cubeZ < maxWaterZ){
            if (m_speed == start_speed)
            {
                 Debug.Log("Enter water");
                 // The speed is half in the water
                 m_speed = m_speed / 2;                
             }
-        }
-        else
-        {
-            // Speed is normal
+        }else            
             m_speed = start_speed;
-        }
-
-
     }
-
-    
-
 }
